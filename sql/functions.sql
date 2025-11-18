@@ -1,0 +1,12 @@
+DELIMITER $$
+
+CREATE FUNCTION fn_avg_rating(evt INT)
+RETURNS DECIMAL(5,2)
+DETERMINISTIC
+BEGIN
+  DECLARE avg_r DECIMAL(5,2);
+  SELECT AVG(rating) INTO avg_r FROM feedback WHERE event_id = evt;
+  RETURN IFNULL(avg_r,0);
+END $$
+
+DELIMITER ;
